@@ -1353,7 +1353,7 @@ class HTML2PDF
         $infos=@getimagesize($src);
 
         // if the image does not exist, or can not be loaded
-        if (count($infos)<2) {
+        if (false === $infos || count($infos)<2) {
             // if the test is activ => exception
             if ($this->_testIsImage) {
                 throw new HTML2PDF_exception(6, $src);
@@ -1589,10 +1589,10 @@ class HTML2PDF
             $inBL[1]-= $border['b']['width'];
         }
 
-        if ($inTL[0]<=0 || $inTL[1]<=0) $inTL = null;
-        if ($inTR[0]<=0 || $inTR[1]<=0) $inTR = null;
-        if ($inBR[0]<=0 || $inBR[1]<=0) $inBR = null;
-        if ($inBL[0]<=0 || $inBL[1]<=0) $inBL = null;
+        if (null === $inTL || $inTL[0]<=0 || $inTL[1]<=0) $inTL = null;
+        if (null === $inTR || $inTR[0]<=0 || $inTR[1]<=0) $inTR = null;
+        if (null === $inBR || $inBR[0]<=0 || $inBR[1]<=0) $inBR = null;
+        if (null === $inBL || $inBL[0]<=0 || $inBL[1]<=0) $inBL = null;
 
         // prepare the background color
         $pdfStyle = '';
